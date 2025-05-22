@@ -1,5 +1,5 @@
 [package]
-name = "snap_waterfall"
+name = "snaprs"
 version = "0.1.0"
 edition = "2024"
 
@@ -17,4 +17,4 @@ rand_distr = '0.5.1'
 
 [build-dependencies]
 bindgen = "0.71.1"
-cbindgen = "0.28.0"
+cbindgen = "0.29.0"

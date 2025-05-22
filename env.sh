@@ -1,1 +1,1 @@
-export LD_LIBRARY_PATH="../cuwf8:./lib"
+export LD_LIBRARY_PATH="../cuddc8:../cuwf8:./lib"

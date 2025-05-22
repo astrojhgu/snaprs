@@ -22,17 +22,17 @@ pub fn main() {
         .unwrap()
         .write_to_file(header_path);
 
-    println!("cargo:rustc-link-search=../cuddc");
+    println!("cargo:rustc-link-search=../cuddc8");
     println!("cargo:rustc-link-search=../cuwf8");
     println!("cargo:rustc-link-search=./lib");
-    println!("cargo:rustc-link-lib=cuddc");
+    println!("cargo:rustc-link-lib=cuddc8");
     println!("cargo:rustc-link-lib=cuwf8");
     //println!("cargo:rustc-link-search=/usr/local/cuda/lib64");
     println!("cargo:rustc-link-lib=cudart");
     //println!("cargo:rustc-link-lib=cuda");
     //println!("cargo:rustc-link-lib=stdc++");
 
-    let header_ddc = PathBuf::from("../cuddc/ddc.h");
+    let header_ddc = PathBuf::from("../cuddc8/ddc.h");
     let header_cuwf = PathBuf::from("../cuwf8/cuwf.h");
     println!(
         "cargo:rerun-if-changed={}",
