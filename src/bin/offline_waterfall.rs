@@ -8,10 +8,10 @@ use std::{
 use clap::Parser;
 use crossbeam::channel::bounded;
 use snaprs::{
+    RAW_SAMP_RATE,
     payload::Payload,
     pipeline::pkt_wf,
     utils::{as_mut_u8_slice, slice_as_u8},
-    RAW_SAMP_RATE,
 };
 
 #[derive(Parser, Debug)]
@@ -77,9 +77,9 @@ fn main() {
         for payload_id in 0.. {
             let mut payload = pool.pull_owned();
             if let Ok(()) = bfrd.read_exact(as_mut_u8_slice(&mut payload.data)) {
-                payload.pkt_cnt=payload_id;
+                payload.pkt_cnt = payload_id;
                 tx_payload.send(payload).unwrap();
-            }else{
+            } else {
                 break;
             }
         }
@@ -96,12 +96,14 @@ fn main() {
     //let mut dump_file = None;
     let mut outfile = args.outname.map(|outname| File::create(&outname).unwrap());
     for i in 0.. {
-        if i%100==0{
+        if i % 100 == 0 {
             println!("{}", i);
         }
-        let x = rx_wf.recv().unwrap();
-        outfile.iter_mut().for_each(|f| {
-            f.write_all(slice_as_u8(&x[..])).unwrap();
-        });
+        if let Ok(x) = rx_wf.recv() {
+            outfile.iter_mut().for_each(|f| {
+                f.write_all(slice_as_u8(&x[..])).unwrap();
+            });
+        }
+        break;
     }
 }
